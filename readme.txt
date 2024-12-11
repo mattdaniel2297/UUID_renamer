@@ -1,3 +1,4 @@
+Future development:
 Getting py3xiv2 to install:
     exiv2 must be installed on OS
     also: sudo apt-get install build-essential libexiv2-dev libboost-python-dev
