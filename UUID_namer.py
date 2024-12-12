@@ -5,6 +5,8 @@ import re
 expression = "[a-fA-F0-9]{32}"
 p = re.compile(expression, re.IGNORECASE)
 
+ingore_ext = [".db", ".md"]
+
 def gen_uuid():
     u = uuid.uuid4().hex
     c = u.replace("-", "")
@@ -26,8 +28,10 @@ def is_file_valid_uuid(file):
 
 def process_file(file, is_force):
     if not is_file_valid_uuid(file) or is_force:
-        print(f"Fixing {file}")
         ext = os.path.splitext(file)[1]
+        if ext in ingore_ext:
+            return
+        print(f"Fixing {file}")
         uuid_basename = gen_uuid()
         new_basename = uuid_basename+ext
         idx = file.find(os.path.basename(file))
